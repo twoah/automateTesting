@@ -1,0 +1,22 @@
+{% load static %}
+ <!DOCTYPE html>
+<html lang="en">
+{% include 'board/include/header.html' %}
+<body>
+        {% include 'board/include/top.html' %}    
+        {% include 'board/include/sidemenu.html' %}
+        <div class="content-body">
+        {% include 'board/include/table.html' %}
+        </div>        
+    </div>
+
+    <script src="{% static 'plugins/common/common.min.js' %}"></script>
+    <script src="{% static 'js/custom.min.js' %}"></script>
+    <script src="{% static 'js/settings.js' %}"></script>
+    <script src="{% static 'js/gleek.js' %}"></script>
+    <script src="{% static 'js/styleSwitcher.js' %}"></script>
+    <script src="{% static 'plugins/jquery-steps/build/jquery.steps.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/plugins-init/jquery-steps-init.js' %}"></script>
+</body>
+</html>

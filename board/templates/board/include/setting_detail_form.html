@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-validation">
+                        <form class="form-valide" action="" method="post">
+                        {% csrf_token %}
+                            <div class="mb-4">
+                                <h3>{{ device.title }}</h3>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="app_name">앱구분:</label>
+                                <div class="col-lg-6">
+                                    <select class="form-control" id="app_name" name="app_name"  style="-moz-appearance: none;-webkit-appearance: none;">
+                                        <option value="롯데ON" {% if device.app_name  == '롯데ON'%} selected {% endif %}>롯데ON</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for=" ">앱버전</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="app_version" name="app_version" value="{{device.app_version}}" placeholder="">
+                                </div>
+                            </div>
+                            <hr class="pt-1 pb-1">
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for=" ">디바이스 이름</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="device_name" name="device_name" value="{{device.device_name}}" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for=" ">디바이스 OS</label>
+                                <div class="col-lg-6">
+                                    <select  id="device_os" name="device_os" class="form-control form-select-lg" style="-moz-appearance: none;-webkit-appearance: none;">>
+                                        <option value="Android" {% if device.device_os  == 'Android'%} selected {% endif %}>Android</option>
+                                        <option value="iOS" {% if device.device_os  == 'iOS'%} selected {% endif %}>iOS</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for=" ">디바이스 플랫폼 버전</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="platform_version" name="platform_version" value="{{device.platform_version}}" placeholder="">
+                                </div>
+                            </div>
+                            <hr class="pt-1 pb-1">
+                             <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for=" ">실행 액티비티</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="app_activity" name="app_activity" value="{{device.app_activity}}" placeholder="">
+                                </div>
+                            </div>
+                             <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for=" ">파일명</label>
+                                <div class="col-lg-6">
+                                    <input type="text" class="form-control" id="app_file_name" name="app_file_name" value="{{device.app_file_name}}" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-6">
+                                    <button type="button" class="float-right btn btn-danger w-25"  onClick="location.href='/setting/{{device.id}}/delete'">삭제하기</button>
+                                    <button type="submit" class="float-right mr-1 btn btn-primary w-25">수정하기</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

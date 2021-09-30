@@ -1,0 +1,41 @@
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4>테스트 케이스</h4>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">#</th>
+                                                <th class="text-center">제목</th>
+                                                <th class="text-center">사용</th>
+                                                <th class="text-center">상세</th>
+                                                <th class="text-center"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for scenario in scenarios  %}
+                                            <tr>
+                                                <th class="text-center">{{ forloop.counter }}</th>
+                                                <td class="text-center">{{ scenario.title }}</td>
+                                                <td class="text-center">{{ scenario.use_yn }}</td>
+                                                <td class="text-center">{{ scenario.description}}</span></td>
+                                                <td class="text-center">
+                                                <div class="btn btn-primary" onClick="location.href='detail/{{scenario.id}}'">수정</div>
+                                                <div class="btn btn-danger color-white" onClick="location.href='delete/{{scenario.id}}'">삭제</div></td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ 

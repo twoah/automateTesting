@@ -1,0 +1,40 @@
+ <div class="container-fluid">
+    <div class="row">
+    {% for device in devices  %}
+         <div class="col-lg-4 col-md-4">
+             <div class="card">
+                 <div class="card-body">
+                     <div class="card-title">
+                         <h4>{{device.title}}</h4>
+                     </div>
+                     <div class="table-responsive">
+                          <table class="table">
+                             <tbody>
+                                <tr>
+                                     <th>앱구분:</th>
+                                     <td>롯데ON</td>
+                                 </tr>
+                                 <tr>
+                                     <th>앱버전:</th>
+                                     <td>{{device.app_version}}</td>
+                                 </tr>
+                                 <tr>
+                                     <th>단말아이디:</th>
+                                     <td>{{device.device_name}}</td>
+                                 </tr>
+                                 <tr>
+                                     <th>단말OS:</th>
+                                     <td>
+                                        {% if device.device_os == 'Android' %}<span class="text-xs badge badge-primary px-2">{{device.device_os}}</span> {% endif %}
+                                        {% if device.device_os == 'iOS' %}<span class="text-xs badge badge-success text-white px-2">{{device.device_os}}</span> {% endif %}                                        
+                                    </td>
+                                 </tr>
+                             </tbody>
+                         </table>
+                     </div>
+                     <div class="btn btn-info float-right" onClick="location.href='/setting/{{ device.id }}'">자세히 보기</div>
+                 </div>
+         </div>
+     </div>
+     {% endfor %}
+ </div>

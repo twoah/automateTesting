@@ -1,0 +1,177 @@
+{% load static %}
+ <!DOCTYPE html>
+<html lang="en">
+{% include 'board/include/header.html' %}
+<body>
+    {% include 'board/include/top.html' %}    
+    {% include 'board/include/sidemenu.html' %}
+        <div class="content-body">
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col-md-12 position-relative">
+                        <form action="create" id="" method="POST" class="position-relative">
+                        {% csrf_token %}
+                             <input type="hidden" name="count" value="0">
+                             <input type="hidden" id="gubuns" name="gubuns[]">
+                             <input type="hidden" id="orders" name="orders[]">
+                             <input type="hidden" id="ids" name="ids[]">
+                             <input type="hidden" id="values" name="values[]">
+                             <div class= "position-relative">
+                                <section class="mb-4">
+                                    <h4>테스트 케이스</h4>
+                                    <div class="p-3 mb-2" style="background-color:white;" id=""> 
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                <select id="selectOption" name="app_name" class="form-control form-select-lg"  style="-moz-appearance: none;-webkit-appearance: none;" aria-label="">
+                                                    <option class="" value="롯데ON">롯데ON</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <select id="selectOption" name="use_yn" class="form-control form-select-lg"  style="-moz-appearance: none;-webkit-appearance: none;" aria-label="">
+                                                        <option value="y">사용</option>
+                                                        <option value="n">미사용</option>
+                                                    </select> 
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="title" class="form-control" placeholder="테스트 케이스 제목">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <input type="text" name="description" class="form-control" placeholder="설명">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section>
+                                <div class="row mb-2">
+                                    <div class="col-3"><h4>세부 케이스</h4></div>
+                                    <div class="col-9">
+                                        <input type="button" class="btn btn-danger float-right" value ="삭제" onClick="delForm()">
+                                        <input type="button" class="btn btn-primary float-right mr-2" value ="추가" onClick="addForm()">
+                                    </div>
+                                </div>
+                                <div class="p-3 mb-2" style="background-color:white;" id=""> 
+                                    <div class="row">                                 
+                                        <div class="col-lg-2 form-group">
+                                            <select id="selectOption" name="gubun" class="form-control form-select-lg"  style="-moz-appearance: none;-webkit-appearance: none;" aria-label="">
+                                                <option class="" value="click">click</option>
+                                                <option class="" value="xpath">xpath</option>
+                                                <option class="" value="input">input</option>
+                                                <option class="" value="back">back</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-1 form-group">
+                                            <select id="selectOption" name="order" class="form-control form-select-lg"  style="-moz-appearance: none;-webkit-appearance: none;" aria-label="">
+                                                <option class="" value="1">1</option>
+                                                <option class="" value="2">2</option>
+                                                <option class="" value="3">3</option>
+                                                <option class="" value="4">4</option>
+                                                <option class="" value="5">5</option>
+                                                <option class="" value="6">6</option>
+                                                <option class="" value="7">7</option>
+                                                <option class="" value="8">8</option>
+                                                <option class="" value="9">9</option>
+                                                <option class="" value="10">10</option>
+                                            </select> 
+                                        </div>
+                                        <div class="col-lg-6 form-group" id="div_click">
+                                            <input type="text" name="element_id" class="form-control" placeholder="element ID">
+                                        </div>
+                                        <div class="col-lg-2 form-group" id="div_input_value">
+                                            <input type="text" name="element_value" class="form-control" placeholder="입력값">
+                                        </div>
+                                    </div>
+                                    <div id="addForm">
+                                    </div>
+                                </div>
+                                </section>
+                             <input type="submit" class="btn btn-primary" style="float:right;" value ="등록" onClick="getlist()">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <script>
+        $(function(){            
+            /*$("#selectOption").change(function(){
+                var data = this.value;
+                if(data == "input"){
+                    $("#div_click").show();
+                    $("#div_input_value").show();
+                }
+                else{
+                    $("#div_click").show();
+                    $("#div_input_value").hide();
+                }
+            });*/            
+        });
+
+        var count = 0;
+        var str = "";
+        function getlist(){
+            var list_gubun = new Array();
+            var list_order = new Array();
+            var list_id = new Array();
+            var list_value = new Array();
+
+            $("select[name='gubun']").each(function(index, item){
+               list_gubun.push($(item).val());
+            });
+            $('#gubuns').val(list_gubun);
+
+            $("select[name='order']").each(function(index, item){
+               list_order.push($(item).val());
+            });
+            $('#orders').val(list_order);
+
+            $("input[name='element_id']").each(function(index, item){
+               list_id.push($(item).val());
+            });
+            $('#ids').val(list_id);
+
+            $("input[name='element_value']").each(function(index, item){
+               list_value.push($(item).val());
+            });
+            $('#values').val(list_value);
+        }
+        function addForm(){
+            var addedFormDiv = document.getElementById("addForm");
+            str = '<div class="row"> <div class="col-lg-2 form-group"> <select id="selectOption" name="gubun" class="form-control form-select-lg" style="-moz-appearance: none;-webkit-appearance: none;" aria-label=""> <option class="" value="click">click</option> <option class="" value="xpath">xpath</option> <option class="" value="input">input</option> <option class="" value="back">back</option> </select> </div><div class="col-lg-1 form-group"> <select id="selectOption" name="order" class="form-control form-select-lg" style="-moz-appearance: none;-webkit-appearance: none;" aria-label=""> <option class="" value="1">1</option> <option class="" value="2">2</option> <option class="" value="3">3</option> <option class="" value="4">4</option> <option class="" value="5">5</option> <option class="" value="6">6</option> <option class="" value="7">7</option> <option class="" value="8">8</option> <option class="" value="9">9</option> <option class="" value="10">10</option> </select> </div><div class="col-lg-6 form-group" id="div_click"> <input type="text" name="element_id" class="form-control" placeholder="element ID"> </div><div class="col-lg-2 form-group" id="div_input_value"> <input type="text" name="element_value" class="form-control" placeholder="입력값"> </div></div>';            
+            var addedDiv = document.createElement("div");
+            addedDiv.id = "added_"+count;
+            addedDiv.innerHTML = str; 
+            addedFormDiv.appendChild(addedDiv);
+            count++;
+            document.baseForm.count.value=count;
+        }
+
+        function delForm(){
+            var addedFormDiv = document.getElementById("addForm");
+            if(count >1){ // 현재 폼이 두개 이상이면
+                var addedDiv = document.getElementById("added_"+(--count)); // 마지막으로 생성된 폼의 ID를 통해 Div객체를 가져옴
+                addedFormDiv.removeChild(addedDiv); // 폼 삭제 
+            }
+            else{ // 마지막 폼만 남아있다면
+                document.baseForm.reset(); // 폼 내용 삭제
+            }
+        }
+    </script>
+    <script src="{% static 'plugins/common/common.min.js' %}"></script>
+    <script src="{% static 'js/custom.min.js' %}"></script>
+    <script src="{% static 'js/settings.js' %}"></script>
+    <script src="{% static 'js/gleek.js' %}"></script>
+    <script src="{% static 'js/styleSwitcher.js' %}"></script>
+    <script src="{% static 'plugins/jquery-steps/build/jquery.steps.min.js' %}"></script>
+    <script src="{% static 'plugins/jquery-validation/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/plugins-init/jquery-steps-init.js' %}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+</body>
+</html>
