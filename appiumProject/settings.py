@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'dbahzzng',                  
         'USER': 'ahzzng',                         
         'PASSWORD': 'blackpink12^^',            
-        'HOST': 'db.test-auto.co.kr',                 
+        'HOST': 'db.andtest.co.kr',                 
         'PORT': '3306',                      
     }
 }
