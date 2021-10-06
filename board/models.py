@@ -4,19 +4,19 @@ import uuid
 
 class Device(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title =  models.CharField(max_length=1000, null=True)
-    app_name =  models.CharField(max_length=1000, null=True)
-    app_version =  models.CharField(max_length=1000, null=True)
-    app_file_name = models.CharField(max_length=1000, null=True)
-    app_activity =  models.CharField(max_length=1000, null=True)
-    device_name =  models.CharField(max_length=1000, null=True)
-    device_os =  models.CharField(max_length=1000, null=True)
-    platform_version =  models.CharField(max_length=1000, null=True)
+    title =  models.CharField(max_length=1000, null=True, blank=True)
+    app_name =  models.CharField(max_length=1000, null=True, blank=True)
+    app_version =  models.CharField(max_length=1000, null=True, blank=True)
+    app_file_name = models.CharField(max_length=1000, null=True, blank=True)
+    app_activity =  models.CharField(max_length=1000, null=True, blank=True)
+    device_name =  models.CharField(max_length=1000, null=True, blank=True)
+    device_os =  models.CharField(max_length=1000, null=True, blank=True)
+    platform_version =  models.CharField(max_length=1000, null=True, blank=True)
     
 class Scenario(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=1000, null=True)
-    description = models.CharField(max_length=1000, null=True)
+    description = models.CharField(max_length=1000, null=True, blank=True)
     app_name = models.CharField(max_length=1000, null=True)
     use_yn = models.CharField(max_length=10, null=True)
     created_at = models.DateTimeField(default=timezone.now, null=True)
